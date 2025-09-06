@@ -24,7 +24,7 @@ export function AppSidebar() {
     },
     {
       title: "Knowledge Base",
-      url: "#",
+      url: "knowledge-base",
       icon: Settings,
     },
     {

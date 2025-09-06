@@ -1,7 +1,8 @@
 import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 export function ChatSelect(){
-    return  <Select>
+  return <div className="ml-4">
+<Select>
       <SelectTrigger className="min-w-[250px] border-gray-600">
         <SelectValue placeholder="Select a product" />
       </SelectTrigger>
@@ -16,4 +17,5 @@ export function ChatSelect(){
         </SelectGroup>
       </SelectContent>
     </Select>
+  </div>
 }

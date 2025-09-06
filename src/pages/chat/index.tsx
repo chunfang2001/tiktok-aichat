@@ -38,9 +38,10 @@ export default function ChatPage() {
             }
             return <></>;
           })}
+          <div className="h-30"></div>
           <form
             onSubmit={submit}
-            className="fixed bottom-10 border border-gray-600 max-w-[800px] w-[95%] rounded-2xl py-3 px-4 bg-neutral-900"
+            className="fixed bottom-4 border border-gray-600 max-w-[800px] w-[95%] rounded-2xl py-3 px-4 bg-neutral-900"
           >
             <div className="px-2 flex justify-between gap-1">
               <input
