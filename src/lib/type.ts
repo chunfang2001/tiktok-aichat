@@ -1,9 +1,20 @@
-type Chat = {
+import { KnowledgeFile } from "@/generated/prisma";
+
+export type Chat = {
   role: string
   message: string
 }
 
-type FileResultType = {
+export type FileResponse = {
   success: boolean;
-  filenameList: string[];
+  filenameList: KnowledgeFile[];
+};
+
+export type FileUploadResponse = {
+  success: boolean;
+};
+
+
+export type UploadFileResponse = {
+  success: boolean;
 };

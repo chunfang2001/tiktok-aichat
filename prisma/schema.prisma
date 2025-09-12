@@ -20,10 +20,10 @@ model Category {
   createdAt DateTime @default(now())
 }
 
-model File {
+model KnowledgeFile {
   id        Int      @id @default(autoincrement())
-  name      String
-  category  String
+  name      String?
+  category  String?
   createdAt DateTime @default(now())
 }
 

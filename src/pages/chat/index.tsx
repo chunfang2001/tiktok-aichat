@@ -1,40 +1,59 @@
 import { AssistantChat } from "@/components/widget/chat/assistant-chat";
 import { UserChat } from "@/components/widget/chat/user-chat";
+import { ChatSelect } from "@/components/widget/header/chat-select";
 import { RoleEnum } from "@/lib/constant";
 import { ChatService } from "@/lib/services/chat_service";
+import { KnowledgeBaseService } from "@/lib/services/knowledge_base_service";
+import { Chat } from "@/lib/type";
 import { Divide, SendHorizontal } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const messagesInitList: Chat[] = [
-  { role: "assistant", message: "Hi, how can I help you"},
+  { role: "assistant", message: "Hi, how can I help you" },
 ];
 
 export default function ChatPage() {
   const [busy, setBusy] = useState(false);
   const [question, setQuestion] = useState("");
   const [messageList, setMessageList] = useState(messagesInitList);
+  const [filenameList, setFilenameList] = useState<string[]>([]);
+  const [selectedFile, setSelectedFile] = useState<string>("");
+
+  const getAllFileList = async () => {
+    const filenameListResult = await KnowledgeBaseService.getFileList();
+
+    setFilenameList(filenameListResult);
+  };
+
+  useEffect(() => {
+    getAllFileList();
+  }, []);
 
   const submit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
     let questionTemp: string = question;
-    let chat: Chat = {role: RoleEnum.User, message: question};
+    let chat: Chat = { role: RoleEnum.User, message: question };
     setMessageList([...messageList, chat]);
-    setQuestion("")
-    
-    const answer: string = await ChatService.chat(questionTemp);
+    setQuestion("");
 
-    setMessageList((prev) => [...prev, {role: RoleEnum.Assistant, message: answer}]);    
+    const answer: string = await ChatService.chat(questionTemp, selectedFile);
+
+    setMessageList((prev) => [
+      ...prev,
+      { role: RoleEnum.Assistant, message: answer },
+    ]);
   };
 
   return (
     <section className="px-4">
       <div className="w-full flex justify-center">
         <div className="max-w-[800px] w-full">
+          {<ChatSelect filenameList={filenameList} onSelectFile={setSelectedFile}/>}
           {messageList.map((message) => {
-            if (message.role === RoleEnum.Assistant){
-              return <AssistantChat message={message.message}></AssistantChat>
-            }else if (message.role === RoleEnum.User){
-              return <UserChat message={message.message}></UserChat>
+            if (message.role === RoleEnum.Assistant) {
+              return <AssistantChat message={message.message}></AssistantChat>;
+            } else if (message.role === RoleEnum.User) {
+              return <UserChat message={message.message}></UserChat>;
             }
             return <></>;
           })}
