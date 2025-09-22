@@ -8,7 +8,8 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
-import { LayoutDashboard, MessageCircle, FileCog, Settings } from "lucide-react";
+import { LayoutDashboard, MessageCircle, FileCog, Settings, CalendarClock } from "lucide-react";
+
 
 export function AppSidebar() {
   const items = [
@@ -26,6 +27,11 @@ export function AppSidebar() {
       title: "Knowledge Base",
       url: "knowledge-base",
       icon: Settings,
+    },
+    {
+      title: "Sessions",
+      url: "session",
+      icon: CalendarClock,
     },
     {
       title: "Settings",

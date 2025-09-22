@@ -3,4 +3,4 @@ export enum RoleEnum {
     User = "user",
 }
 
-export const API_ROUTE: string = "http://127.0.0.1:8000";
+export const API_ROUTE: string = "https://chunrong1805--fastapi-supabase-openai-fastapi-app.modal.run";
